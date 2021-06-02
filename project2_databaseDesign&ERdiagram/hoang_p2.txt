@@ -1,0 +1,42 @@
+a. SHOW TABLES
+
+SQL command:
+SHOW TABLES
+;
+
+Results:
+Tables_in_people
+countries
+persons
+registration
+
+b. Execute DESCRIBE for each table in the database
+SQL command:
+DESCRIBE PERSONS
+;
+
+Results:
+Field,Type,Null,Key,Default,Extra
+PeopleID,int,NO,PRI,NULL,auto_increment
+Email,varchar(50),YES,,NULL,
+FullName,varchar(45),YES,,NULL,
+
+SQL command:
+DESCRIBE COUNTRIES
+;
+
+Results:
+Field,Type,Null,Key,Default,Extra
+CountryID,int,NO,PRI,NULL,auto_increment
+Country,varchar(45),NO,,NULL,
+
+SQL command:
+DESCRIBE REGISTRATION
+;
+
+Results:
+Field,Type,Null,Key,Default,Extra
+RegistrationNo,int,NO,PRI,NULL,auto_increment
+DateRegistered,datetime,NO,,NULL,
+PeopleID,int,NO,MUL,NULL,
+CountryID,int,NO,MUL,NULL,

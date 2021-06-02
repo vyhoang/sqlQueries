@@ -1,0 +1,93 @@
+2. Add to the database the following table and data:
+a. Add a EDUCATION table with the following columns;
+	i. country code as a primary key,
+	ii. literacy rate,
+	ii. male literacy rate,
+	iv. female literacy rate
+
+DROP TABLE IF EXISTS Education;
+CREATE	TABLE Education
+	(CountryCode		CHAR(3)	 	NOT NULL	DEFAULT '',
+         LiteracyRate		FLOAT(4,1)	NOT NULL 	DEFAULT '0.0',
+         MaleLiteracyRate	FLOAT(4,1) 	NOT NULL 	DEFAULT '0.0',
+         FemaleLiteracyRate 	FLOAT(4,1) 	NOT NULL 	DEFAULT '0.0',
+         PRIMARY KEY	(CountryCode)
+         )
+;
+
+
+
+b. Add data for the following countries
+	AFG, 38, 52, 24
+
+	DEU, 99, 99, 99
+
+	NLD, 99, 99, 99
+
+	USA, 99, 99, 99
+
+INSERT INTO Education VALUES ('AFG', '38', '52', '24')
+;
+INSERT INTO Education VALUES ('DEU', '99', '99', '99')
+;
+INSERT INTO Education VALUES ('NLD', '99', '99', '99')
+;
+INSERT INTO Education VALUES ('USA', '99', '99', '99')
+;
+
+3. Execute the following commands and save the results.
+a. Display the languages of the United States
+SQL Command:
+
+SELECT LANGUAGE
+FROM CountryLanguage
+WHERE CountryCode = 'USA'
+;
+
+Results:
+LANGUAGE
+English
+French
+German
+Italian
+Japanese
+Korean
+Polish
+Portuguese
+Spanish
+Tagalog
+Vietnamese
+
+
+
+b. Display the cities of Germany and the population of each city
+SQL Command:
+
+SELECT NAME, POPULATION
+FROM City
+WHERE CountryCode = 'DEU'
+;
+
+Results:
+NAME,POPULATION
+Berlin,3386667
+Hamburg,1704735
+"Frankfurt am Main",643821
+Essen,599515
+Dortmund,590213
+Stuttgart,582443
+
+
+c. Display the female literacy rate of all countries
+SQL Command:
+
+SELECT FemaleLiteracyRate
+FROM Education
+;
+
+Results:
+FemaleLiteracyRate
+24.0
+99.0
+99.0
+99.0

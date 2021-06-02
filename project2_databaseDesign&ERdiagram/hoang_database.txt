@@ -1,0 +1,68 @@
+CREATE DATABASE people;
+USE people;
+
+--
+-- Table structure for table `persons`
+--
+
+DROP TABLE IF EXISTS `persons`;
+CREATE TABLE `persons` (
+  `PeopleID` int NOT NULL AUTO_INCREMENT,
+  `Email` varchar(50) DEFAULT NULL,
+  `FullName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`PeopleID`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `persons`
+--
+
+INSERT INTO `persons` VALUES (1,'Carley_Bahringer@destiny.com','Carley Bahringer'),(2,'Patricia_Fadel@avis.com','Patricia Fadel'),(3,'Sedrick@godfrey.ca','Sedrick Kuphal'),(4,'Briana_Berge@axel.ca','Briana Berge'),(5,'Lucy_Lockman@abby.org','Lucy Lockman'),(6,'Ayden_Flatley@colin.biz','Ayden Flatley'),(7,'Alec.Boyle@aurore.co.uk','Alec Boyle'),(8,'Ozella_Feil@prudence.ca','Ozella Feil');
+
+
+
+--
+-- Table structure for table `countries`
+--
+
+DROP TABLE IF EXISTS `countries`;
+CREATE TABLE `countries` (
+  `CountryID` int NOT NULL AUTO_INCREMENT,
+  `Country` varchar(45) NOT NULL,
+  PRIMARY KEY (`CountryID`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` VALUES (1,'Papua New Guinea'),(2,'Saint Lucia'),(3,'Chile'),(4,'Nicaragua'),(5,'Iceland'),(6,'Germany'),(7,'France'),(8,'Brazil'),(9,'Lesotho'),(10,'Sweden');
+
+
+
+--
+-- Table structure for table `registration`
+--
+
+DROP TABLE IF EXISTS `registration`;
+CREATE TABLE `registration` (
+  `RegistrationNo` int NOT NULL AUTO_INCREMENT,
+  `DateRegistered` datetime NOT NULL,
+  `PeopleID` int NOT NULL,
+  `CountryID` int NOT NULL,
+  PRIMARY KEY (`RegistrationNo`),
+  KEY `PeopleID` (`PeopleID`),
+  KEY `registration_ibfk_2` (`CountryID`),
+  CONSTRAINT `registration_ibfk_1` FOREIGN KEY (`PeopleID`) REFERENCES `persons` (`PeopleID`),
+  CONSTRAINT `registration_ibfk_2` FOREIGN KEY (`CountryID`) REFERENCES `countries` (`CountryID`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `registration`
+--
+
+INSERT INTO `registration` VALUES (1,'1987-10-03 22:09:54',1,1),(2,'2012-05-10 11:07:49',2,2),(3,'2007-11-12 00:09:53',3,3),(4,'2006-03-26 15:32:08',4,4),(5,'2014-02-13 10:26:57',5,5),(6,'1999-02-12 00:14:54',5,6),(7,'1987-01-23 21:43:22',6,7),(8,'2007-08-23 13:42:41',7,8),(9,'2005-12-30 18:24:59',8,9),(10,'2009-06-19 10:32:55',8,10);
+
+-- Dump completed on 2020-11-16 18:33:07
+
+

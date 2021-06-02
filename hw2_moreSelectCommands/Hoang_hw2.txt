@@ -1,0 +1,104 @@
+1. Use the Tennis database.
+
+SQL Command:
+USE	TENNIS;
+
+2. Execute the following queries and save the results. Also save the command you created to answer the query.
+A. Get the numbers of the teams of which the player with the name Parmenter and initial R is a member; in this example, we assume that no two players have the same name and initials.
+
+SQL Command:
+SELECT 		TEAMNO
+FROM 		TEAMS
+WHERE 		PLAYERNO =
+			(SELECT		PLAYERNO
+			 FROM 		PLAYERS
+			 WHERE		NAME = 'Parmenter'
+			 AND		INITIALS = 'R')
+;
+
+Result:
+TEAMNO
+1
+
+
+B. For each penalty, find the payment number, the amount, and the number and name of the player who incurred it.
+
+SQL Command:
+SELECT		PAYMENTNO, PENALTIES.PLAYERNO, AMOUNT, NAME
+FROM		PENALTIES, PLAYERS
+WHERE		PENALTIES.PLAYERNO = PLAYERS.PLAYERNO
+;
+
+Result:
+PAYMENTNO,PLAYERNO,AMOUNT,NAME
+1,6,100.00,Parmenter
+2,44,75.00,Baker
+3,27,100.00,Collins
+4,104,50.00,Moorman
+5,44,25.00,Baker
+6,8,25.00,Newcastle
+7,44,30.00,Baker
+8,27,75.00,Collins
+
+
+
+C. For ALL players, get the player number and a list of the numbers of teams for which they have ever played. Some players may not have played for teams in the database. Hint a JOIN of some kind is needed.
+
+SQL Command:
+SELECT		P.PLAYERNO, M.TEAMNO
+FROM		PLAYERS	AS P LEFT JOIN MATCHES AS M
+		ON P.PLAYERNO = M.PLAYERNO
+;
+
+Result:
+PLAYERNO,TEAMNO
+2,1
+6,1
+6,1
+6,1
+7,NULL
+8,1
+8,2
+27,2
+28,NULL
+39,NULL
+44,1
+57,1
+83,1
+95,NULL
+100,NULL
+104,2
+112,2
+112,2
+
+D. Get the number of each player who won at least one match. A win from matches is more wins than losses.
+
+SQL Command:
+SELECT		DISTINCT PLAYERNO
+FROM		MATCHES
+WHERE		WON > LOST
+;
+
+Result:
+PLAYERNO
+6
+44
+57
+27
+104
+
+
+E. Get the payment numbers of the penalties incurred by players who were born after 1965.
+
+SQL Command:
+SELECT		PAYMENTNO
+FROM		PENALTIES
+WHERE		1965 <
+			(SELECT	YEAR(BIRTH_DATE)
+             		 FROM	PLAYERS
+			 WHERE	PLAYERS.PLAYERNO = PENALTIES.PLAYERNO)
+;
+
+Result:
+PAYMENTNO
+4
